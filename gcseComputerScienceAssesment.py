@@ -6,7 +6,7 @@
 #
 # Created:     13/09/2018
 # Copyright:   (c) hartleyj15 2018
-# Licence:     <your licence>
+# Licence:     no Licence
 #-------------------------------------------------------------------------------
 
 import random
