@@ -18,14 +18,22 @@ warnings.filterwarnings("ignore")
 
 class gameSetup():
     def startGame(): #asks player if they want to play
-        play = input("Play or quit (Enter P or Q)?: ")
+        enter = True
+        while enter == True:
+            play = input("Play or quit (Enter P or Q)?: ")
 
-        if play == "Q":
-            print("goodbye then")
-            sys.exit("Quit game")
+            if play == "Q":
+                print("goodbye then")
+                sys.exit("Quit game")
 
-        elif play == "P":
-            print("lets play")
+            elif play == "P":
+                print("lets play")
+                print("------------Welcome to Celebrity Dogs!-------------")
+                print("This is a game of skill, intelligence and, well, luck!\nYou are given a card and you given a choice between the attrubutes: Exercise, Intelligence, Friendliness, and Drool.\nFor E, I and F the highest value wins and you get a card from the computer's deck.\nThe lowest value wins for D.\nIf you lose a round it is the computer's go and it is given a card from your deck.\nGood luck!")
+                enter = False
+
+            else:
+                print("You entered the wrong letter - please try again")
 
 
     def deckSize(): #asks deck size wanted
@@ -223,9 +231,6 @@ try:
 
         try:
 
-
-
-
             if previousPlayerWin == True or previousCPUWin == False:
 
                 gamePlay.cardDisplayed(i)
@@ -243,7 +248,7 @@ try:
                 time.sleep(1)
 
                 playerValue = humanPlayer[0][cpuPick]
-                cpuValue = humanPlayer[0][cpuPick]
+                cpuValue = cpuPlayer[0][cpuPick]
                 print("It is %s vs %s" %(playerValue, cpuValue))
 
                 time.sleep(1)
@@ -274,6 +279,6 @@ try:
 
 
 except KeyboardInterrupt:
-    print("Thank you for playing")
+    print("\nThank you for playing")
     print("Have a good day")
     sys.exit()
