@@ -129,6 +129,9 @@ class gamePlay():
                     elif player > cpu:
                         print("You lost the round!\n")
                         return False
+                    elif player == cpu:
+                        print("You won the round!")
+                        return True
                     else:
                         sys.exit("playerValue is an invalid number")
 
@@ -139,6 +142,9 @@ class gamePlay():
             elif player < cpu:
                 print("You lost the round!\n")
                 return False
+            elif player == cpu:
+                print("You won the round!")
+                return True
             else:
                 sys.exit("playerValue is an invalid number")
 
@@ -150,8 +156,10 @@ class gamePlay():
                     elif player < cpu:
                         print("You lost the round!\n")
                         return False
+                    elif player == cpu:
+                        return False
                     else:
-                        sys.exit("playerValue is an invalid number")
+                        sys.exit("cpuValue is an invalid number")
 
         elif pick == "E" or "I" or "F":
             if player < cpu:
@@ -160,8 +168,11 @@ class gamePlay():
             elif player > cpu:
                 print("You lost the round!\n")
                 return False
+            elif player == cpu:
+                print("You won the round")
+                return False
             else:
-                sys.exit("playerValue is an invalid number")
+                sys.exit("cpuValue is an invalid number")
 
 
     def winGamePlayer():
@@ -204,6 +215,7 @@ try:
     gameSetup.cardCreate()
     gameSetup.deckSort()
     previousPlayerWin = True
+    previousCPUWin = False
 
 
     for i in range(deck):
@@ -214,7 +226,7 @@ try:
 
 
 
-            if previousPlayerWin == True:
+            if previousPlayerWin == True or previousCPUWin == False:
 
                 gamePlay.cardDisplayed(i)
                 playerPick = gamePlay.attributePick()
@@ -222,32 +234,32 @@ try:
                 cpu = cpuValue
 
                 playerWin = gamePlay.playerWinRound(player,cpu,playerPick)
+                cpuWin = not(playerWin)
 
-            elif previousPlayerWin == False:
+            elif previousPlayerWin == False or previousCPUWin == True:
                 cpuPick = cpuPlayerCode.randomAttribute()
-                print(cpuPick)
+                print("CPU has chosen %s" %(cpuPick))
 
                 time.sleep(1)
 
                 playerValue = humanPlayer[0][cpuPick]
                 cpuValue = humanPlayer[0][cpuPick]
-                print(playerValue)
-                print(cpuValue)
+                print("It is %s vs %s" %(playerValue, cpuValue))
 
                 time.sleep(1)
 
-                playerWin = gamePlay.cpuWinRound(playerValue,cpuValue,cpuPick)
+                cpuWin = gamePlay.cpuWinRound(playerValue,cpuValue,cpuPick)
+                playerWin = not(cpuWin)
 
                 time.sleep(4)
 
 
             previousPlayerWin = playerWin
+            previousCPUWin = cpuWin
             gamePlay.moveCards(playerWin)
 
 
         except IndexError:
-
-            print("index error")
 
             if gamePlay.winGamePlayer() == True:
                 print("You won the game!")
