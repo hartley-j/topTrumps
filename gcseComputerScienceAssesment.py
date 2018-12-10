@@ -29,7 +29,7 @@ class gameSetup():
             elif play == "P":
                 print("lets play")
                 print("------------Welcome to Celebrity Dogs!-------------")
-                print("This is a game of skill, intelligence and, well, luck!\nYou are given a card and you given a choice between the attrubutes: Exercise, Intelligence, Friendliness, and Drool.\nFor E, I and F the highest value wins and you get a card from the computer's deck.\nThe lowest value wins for D.\nIf you lose a round it is the computer's go and it is given a card from your deck.\nGood luck!")
+                print("This is a simple comparison game of top trumps\nYou are given a card and you a choice between the attributes: Exercise, Intelligence, Friendliness, and Drool\nFor E, I and F the highest value wins and you get a card from the computer's deck\nThe lowest value wins for D\nIf you lose a round it is the computer's go and it is given a card from your deck\nGOOD LUCK!")
                 enter = False
 
             else:
@@ -54,7 +54,7 @@ class gameSetup():
                     deckNo = False
 
             except ValueError:
-                print("Error 404 - you entered a string")
+                print("Error - you entered a string")
                 print("Please try again")
 
     def cardCreate(): #creates deck of cards from file dogs.txt and randomly creates random skills
@@ -195,6 +195,12 @@ class gamePlay():
         else:
             return False
 
+    def notBoolean(bool):
+        if bool == True:
+            return False
+        else:
+            return True
+
 class cpuPlayerCode():
 
     def cpuChallenge():
@@ -239,7 +245,8 @@ try:
                 cpu = cpuValue
 
                 playerWin = gamePlay.playerWinRound(player,cpu,playerPick)
-                cpuWin = not(playerWin)
+                cpuWin = gamePlay.notBoolean(playerWin)
+                print(cpuWin,playerWin)
 
             elif previousPlayerWin == False or previousCPUWin == True:
                 cpuPick = cpuPlayerCode.randomAttribute()
@@ -254,7 +261,8 @@ try:
                 time.sleep(1)
 
                 cpuWin = gamePlay.cpuWinRound(playerValue,cpuValue,cpuPick)
-                playerWin = not(cpuWin)
+                playerWin = gamePlay.notBoolean(cpuWin)
+                print(cpuWin,playerWin)
 
                 time.sleep(4)
 
