@@ -158,10 +158,10 @@ class gamePlay():
 
     def cpuWinRound(player,cpu,pick):
         if pick == "D":
-                    if player > cpu:
+                    if player < cpu:
                         print("You won the round!\n")
                         return True
-                    elif player < cpu:
+                    elif cpu < player:
                         print("You lost the round!\n")
                         return False
                     elif player == cpu:
@@ -170,10 +170,10 @@ class gamePlay():
                         sys.exit("cpuValue is an invalid number")
 
         elif pick == "E" or "I" or "F":
-            if player < cpu:
+            if player > cpu:
                 print("You won the round!\n")
                 return True
-            elif player > cpu:
+            elif cpu > player:
                 print("You lost the round!\n")
                 return False
             elif player == cpu:
@@ -237,7 +237,7 @@ try:
 
         try:
 
-            if previousPlayerWin == True or previousCPUWin == False:
+            if previousPlayerWin == True and previousCPUWin == False:
 
                 gamePlay.cardDisplayed(i)
                 playerPick = gamePlay.attributePick()
@@ -246,9 +246,10 @@ try:
 
                 playerWin = gamePlay.playerWinRound(player,cpu,playerPick)
                 cpuWin = gamePlay.notBoolean(playerWin)
-                print(cpuWin,playerWin)
+                print(playerWin,cpuWin)
 
-            elif previousPlayerWin == False or previousCPUWin == True:
+            elif previousPlayerWin == False and previousCPUWin == True:
+
                 cpuPick = cpuPlayerCode.randomAttribute()
                 print("CPU has chosen %s" %(cpuPick))
 
@@ -262,7 +263,7 @@ try:
 
                 cpuWin = gamePlay.cpuWinRound(playerValue,cpuValue,cpuPick)
                 playerWin = gamePlay.notBoolean(cpuWin)
-                print(cpuWin,playerWin)
+                print(playerWin,cpuWin)
 
                 time.sleep(4)
 
