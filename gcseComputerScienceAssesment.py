@@ -6,7 +6,6 @@
 #
 # Created:     13/09/2018
 # Copyright:   (c) hartleyj15 2018
-# Licence:     no Licence
 #-------------------------------------------------------------------------------
 
 import random
@@ -97,7 +96,7 @@ class gameSetup():
 
 class gamePlay():
 
-    def cardDisplayed(numberOfTurn):
+    def cardDisplayed(numberOfTurn): #displays current card in player's deck
         card = humanPlayer[0]
         print("-------------------------------Card %s----------------------------" %(numberOfTurn + 1))
         print("Name:...............................",card["name"])
@@ -107,7 +106,7 @@ class gamePlay():
         print("Droll:..............................",card["D"])
 
 
-    def attributePick():
+    def attributePick(): #player picks attribute
         global playerValue,cpuValue
         playerPick = input("Please pick your attribute choice: Exercise(E), Intelligence(I), Friendliness(F),Droll(D) \n")
         playerValue = []
@@ -116,8 +115,8 @@ class gamePlay():
         cpuValue = cpuPlayer[0][playerPick]
 
         return playerPick
-    def moveCards(playerWin):
 
+    def moveCards(playerWin): #moves cards between decks
         humanPlayer.insert(len(humanPlayer),humanPlayer.pop(0))
         cpuPlayer.insert(len(cpuPlayer),cpuPlayer.pop(0))
 
@@ -129,7 +128,7 @@ class gamePlay():
             print("Error - couldn't move cards")
             print("Please try again")
 
-    def playerWinRound(player,cpu,pick):
+    def playerWinRound(player,cpu,pick): #checks if play has won round
         if pick == "D":
                     if player < cpu:
                         print("You won the round!\n")
@@ -156,7 +155,7 @@ class gamePlay():
             else:
                 sys.exit("playerValue is an invalid number")
 
-    def cpuWinRound(player,cpu,pick):
+    def cpuWinRound(player,cpu,pick): #checks whether cpu has won round
         if pick == "D":
                     if player < cpu:
                         print("You won the round!\n")
@@ -183,19 +182,19 @@ class gamePlay():
                 sys.exit("cpuValue is an invalid number")
 
 
-    def winGamePlayer():
+    def winGamePlayer(): #checks if player has won game
         if len(cpuPlayer) == 0:
             return True
         else:
             return False
 
-    def winGameCPU():
+    def winGameCPU(): #checks if cpu has won game
         if len(humanPlayer) == 0:
             return True
         else:
             return False
 
-    def notBoolean(bool):
+    def notBoolean(bool): #returns not value of bool
         if bool == True:
             return False
         else:
@@ -203,7 +202,7 @@ class gamePlay():
 
 class cpuPlayerCode():
 
-    def cpuChallenge():
+    def cpuChallenge(): #cpu checks what attribute will win
         if cpuPlayer[0]["E"] > humanPlayer[0]["E"]:
             return "E"
         elif cpuPlayer[0]["I"] > humanPlayer[0]["I"]:
@@ -215,7 +214,7 @@ class cpuPlayerCode():
         else:
             sys.exit("cpu challenge error")
 
-    def randomAttribute():
+    def randomAttribute(): #chooses random attribute
 
         attr = ["E","I","F","D"]
         return random.choice(attr)
